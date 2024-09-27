@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-nx-welcome',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NzButtonModule],
   template: `
     <!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -435,6 +436,7 @@ import { CommonModule } from '@angular/common';
             <span> Hello there, </span>
             Welcome myngapp 👋
           </h1>
+          <button nz-button nzType="primary">Primary</button>
         </div>
         <!--  HERO  -->
         <div id="hero" class="rounded">

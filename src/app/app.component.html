@@ -1,1 +1,76 @@
 <router-outlet></router-outlet>
+
+
+<nz-row>
+    <nz-col [nzSpan]="12">
+        Colonne 1 (12/24)
+        <button nz-button nzType="primary" (click)="isCollapsed = !isCollapsed">Primary</button>
+    </nz-col>
+    <nz-col [nzSpan]="12">
+        Colonne 2 (12/24)
+    </nz-col>
+</nz-row>
+
+<nz-row>
+    <nz-col [nzSpan]="8">Colonne 1 (8/24)</nz-col>
+    <nz-col [nzSpan]="8">Colonne 2 (8/24)</nz-col>
+    <nz-col [nzSpan]="8">Colonne 3 (8/24)</nz-col>
+</nz-row>
+
+<div nz-row nzJustify="center">
+    <div nz-col nzSpan="6" style="background-color: aqua;" class="container">Colonne 1</div>
+    <div nz-col nzSpan="6"  style="background-color: rgb(52, 185, 185);" class="container">Colonne 2</div>
+    <div nz-col nzSpan="6" style="background-color: rgb(117, 241, 241);" class="container">Colonne 3</div>
+  </div>
+
+
+<nz-radio-group [(ngModel)]="isVertical">
+    <label nz-radio [nzValue]="false">horizontal</label>
+    <label nz-radio [nzValue]="true">vertical</label>
+</nz-radio-group>
+
+
+    <div nz-flex [nzVertical]="isVertical">
+        <div class="flex-item" style="background-color: aqua;" class="container"></div>
+        <div class="flex-item even" style="background-color: rgb(52, 185, 185);" class="container"></div>
+        <div class="flex-item" style="background-color: rgb(117, 241, 241);" class="container"></div>
+        <div class="flex-item even" style="background-color: rgb(9, 131, 131);" class="container"></div>
+    </div>
+<nz-layout>
+    <nz-header class="header">
+        <div class="logo">Mon application</div>
+    </nz-header>
+
+    <nz-layout>
+        <nz-sider [nzCollapsible]="true" [nzCollapsed]="isCollapsed" (nzCollapse)="isCollapsed = $event">
+            <div class="logo"> </div>
+            <ul nz-menu nzMode="inline" [nzTheme]="'dark'">
+                <li nz-menu-item>
+                    <span nz-icon nzType="user"></span>
+                    <span>Utilisateur</span>
+                </li>
+                <li nz-menu-item>
+                    <span nz-icon nzType="video-camera"></span>
+                    <span>Caméra</span>
+                </li>
+                <li nz-menu-item>
+                    <span nz-icon nzType="upload"></span>
+                    <span>Télécharger</span>
+                </li>
+            </ul>
+        </nz-sider>
+
+        <nz-layout>
+            <nz-content style="margin: 24px 16px 0;">
+                <div style="padding: 24px; background: #fff; min-height: 360px;">
+                    Contenu principal
+                </div>
+            </nz-content>
+
+            <nz-footer style="text-align: center;">Mon application ©2024</nz-footer>
+        </nz-layout>
+    </nz-layout>
+</nz-layout>
+
+
+

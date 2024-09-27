@@ -4,7 +4,9 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 export const appRoutes: Route[] = [
   {
     path:'',
-    component:NxWelcomeComponent,
+    // component:NxWelcomeComponent,
+    loadComponent: () =>
+      import('@myngapp/produts').then((c) => c.ProdutsComponent),
     pathMatch:'full'
   },
   {
