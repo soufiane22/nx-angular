@@ -2,40 +2,130 @@
 
 
 <nz-row>
-    <nz-col [nzSpan]="12">
-        Colonne 1 (12/24)
-        <button nz-button nzType="primary" (click)="isCollapsed = !isCollapsed">Primary</button>
-    </nz-col>
-    <nz-col [nzSpan]="12">
-        Colonne 2 (12/24)
+    <nz-col [nzSpan]="24">
+      <form  nz-form [formGroup]="validateForm"
+      (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email" >
+         E-mail
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" nzFor="email" [nzXs]="24" nzErrorTip="The input is not valid E-mail">
+          <input nz-input formControlName="email" id="email"  />
+          <div *ngIf="validateForm.get('email')?.invalid && validateForm.get('email')?.touched">
+            <div *ngIf="validateForm.get('email')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="validateForm.get('email')?.errors?.['email']">Please enter a valid email.</div>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzRequired nzFor="password" [nzXs]="24">
+            Password
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!" >
+            <input type="password"  nz-input  id="password"  formControlName="password" 
+             (ngModelChange)="updateConfirmValidator()" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+          <ng-template #errorTpl let-control>
+            @if (validateForm.get('checkPassword')?.errors?.['required']) {
+              Please confirm your password!
+            }
+            @if (control.errors?.['confirm']) {
+              Two passwords that you enter is inconsistent!
+            }
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">Register</button>
+        </nz-form-control>
+      </nz-form-item>
+      </form>
     </nz-col>
 </nz-row>
 
 <nz-row>
-    <nz-col [nzSpan]="8">Colonne 1 (8/24)</nz-col>
+    <nz-col [nzSpan]="8" nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">Colonne 1 (8/24)</nz-col>
     <nz-col [nzSpan]="8">Colonne 2 (8/24)</nz-col>
-    <nz-col [nzSpan]="8">Colonne 3 (8/24)</nz-col>
+    <nz-col [nzSpan]="8" nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">Colonne 3 (8/24)</nz-col>
 </nz-row>
 
-<div nz-row nzJustify="center">
-    <div nz-col nzSpan="6" style="background-color: aqua;" class="container">Colonne 1</div>
-    <div nz-col nzSpan="6"  style="background-color: rgb(52, 185, 185);" class="container">Colonne 2</div>
-    <div nz-col nzSpan="6" style="background-color: rgb(117, 241, 241);" class="container">Colonne 3</div>
-  </div>
+<div nz-row nzAlign="top">
+    <div nz-col nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6" style="background-color: aqua;" class="container">Colonne 1
+    </div>
+    <div nz-col nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6" style="background-color: rgb(52, 185, 185);"
+        class="container">Colonne 2</div>
+    <div nz-col nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6" style="background-color: rgb(117, 241, 241);"
+        class="container">Colonne 3</div>
+</div>
+
+<!-- Using NZ-Flex -->
+<div nz-row>
+    <div nz-col nzFlex="1 1 auto" style="background-color: rgb(0, 132, 255);">Colonne 1</div>
+    <div nz-col nzFlex="0 1 300px" style="background-color: rgb(87, 160, 228);">Colonne 2 (300px max)</div>
+    <div nz-col nzFlex="1 1 auto" style="background-color: rgb(20, 95, 165);">Colonne 3</div>
+</div>
+
+<!-- Using nzJustify & nzAlign -->
+<div class="block">
+    <div class="segment-wrapper">
+        <span>Select Justify:</span>
+        <nz-segmented [nzOptions]="justifySegment" [(ngModel)]="selectedJustification"></nz-segmented>
+    </div>
+
+    <div class="segment-wrapper">
+        <span>Select Align:</span>
+        <nz-segmented [nzOptions]="alignSegment" [(ngModel)]="selectedAlignment"></nz-segmented>
+    </div>
+
+    <div class="btn-wrappers" nz-flex [nzJustify]="justifySegment[selectedJustification]"
+        [nzAlign]="alignSegment[selectedAlignment]">
+        <button nz-button nzType="primary">Primary</button>
+        <button nz-button nzType="primary">Primary</button>
+        <button nz-button nzType="primary">Primary</button>
+        <button nz-button nzType="primary">Primary</button>
+
+    </div>
+</div>
 
 
+<!-- Test nz-space -->
+<div class="block">
+    <div nz-space nzSize="large" nzDirection="vertical">
+        <button nz-button nzType="primary">Button 1</button>
+        <button nz-button nzType="default">Button 2</button>
+        <button nz-button nzType="dashed">Button 3</button>
+    </div>
+
+    <nz-input-group nzSize="large">
+        <input nz-input placeholder="Large input" />
+        <input nz-input placeholder="Large input" />
+    </nz-input-group>
+</div>
+
+
+
+
+<!-- Using Radio Group and Flex -->
 <nz-radio-group [(ngModel)]="isVertical">
     <label nz-radio [nzValue]="false">horizontal</label>
     <label nz-radio [nzValue]="true">vertical</label>
 </nz-radio-group>
 
 
-    <div nz-flex [nzVertical]="isVertical">
-        <div class="flex-item" style="background-color: aqua;" class="container"></div>
-        <div class="flex-item even" style="background-color: rgb(52, 185, 185);" class="container"></div>
-        <div class="flex-item" style="background-color: rgb(117, 241, 241);" class="container"></div>
-        <div class="flex-item even" style="background-color: rgb(9, 131, 131);" class="container"></div>
-    </div>
+<div nz-flex [nzVertical]="isVertical">
+    <div class="flex-item" style="background-color: aqua;" class="container"></div>
+    <div class="flex-item even" style="background-color: rgb(52, 185, 185);" class="container"></div>
+    <div class="flex-item" style="background-color: rgb(117, 241, 241);" class="container"></div>
+    <div class="flex-item even" style="background-color: rgb(9, 131, 131);" class="container"></div>
+</div>
 <nz-layout>
     <nz-header class="header">
         <div class="logo">Mon application</div>
@@ -71,6 +161,3 @@
         </nz-layout>
     </nz-layout>
 </nz-layout>
-
-
-
